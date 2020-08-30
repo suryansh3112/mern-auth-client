@@ -41,12 +41,14 @@ function App() {
       <Router>
         <UserContext.Provider value={{ userData, setUserData }}>
           <Navbar />
-          <Switch>
-            <Route path="/home" component={Home} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/register" component={Register} />
-            <Route path="/login" component={Login} />
-          </Switch>
+          <div className="container">
+            <Switch>
+              <Route path="/home" component={Home} />
+              <Route path="/contact" component={Contact} />
+              <Route path="/register" component={Register} />
+              <Route path="/login" component={Login} />
+            </Switch>
+          </div>
         </UserContext.Provider>
       </Router>
     </>
