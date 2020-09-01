@@ -1,9 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import UserContext from '../../context/UserContext';
 import LeftMenu from './LeftMenu';
 import RightMenu from './RightMenu';
 import Mobile from './Mobile';
 import { Drawer, Button } from 'antd';
+import { useLocation } from 'react-router-dom';
 import './navbar.css';
 
 function Navbar() {

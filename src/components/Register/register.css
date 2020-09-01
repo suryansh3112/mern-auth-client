@@ -1,3 +1,11 @@
-/* .reg-form h1 {
+.reg-container h1 {
   text-align: center;
-} */
+}
+.reg-form {
+  max-width: 350px;
+  margin: 3rem auto;
+}
+
+.reg-form-button {
+  width: 100%;
+}

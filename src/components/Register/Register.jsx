@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './register.css';
+import Error from '../Errors/Errors';
 
 function Register() {
   const history = useHistory();
+  const [error, setError] = useState('');
   const formItemLayout = {
     labelCol: {
       span: 24
-    },
-    wrapperCol: {
-      span: 10
     }
+    // wrapperCol: {
+    //   span: 10
+    // }
   };
 
   const onFinish = async (values) => {
@@ -25,15 +27,24 @@ function Register() {
       console.log(res);
       history.push('/login');
     } catch (error) {
-      alert('Something went wrong,Please try again.');
+      setError(error.response.data.message);
+      //alert('Something went wrong,Please try again.');
     }
   };
 
+  const clearError = () => setError(undefined);
+
   return (
-    <div className="reg-form">
+    <div className="reg-container">
       <h1>Register</h1>
 
-      <Form name="registeration-form" onFinish={onFinish} {...formItemLayout}>
+      <Form
+        name="registeration-form"
+        onFinish={onFinish}
+        {...formItemLayout}
+        className="reg-form"
+      >
+        {error && <Error message={error} clearError={clearError} />}
         <Form.Item
           label="E-mail"
           name="email"
@@ -91,7 +102,7 @@ function Register() {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" className="reg-form-button">
             Register
           </Button>
         </Form.Item>

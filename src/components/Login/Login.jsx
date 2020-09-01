@@ -1,13 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Error from '../Errors/Errors';
 import UserContext from '../../context/UserContext';
 import './login.css';
 
 function Login() {
   const { setUserData } = useContext(UserContext);
+  const [error, setError] = useState('');
 
   const onFinish = async (values) => {
     console.log('Received values of form: ', values);
@@ -23,14 +25,17 @@ function Login() {
       localStorage.setItem('auth-token', loginRes.data.token);
       window.location = '/home';
     } catch (error) {
-      console.log(error);
-      alert('Something went wrong,Please try again.');
+      setError(error.response.data.message);
+      // alert('Something went wrong,Please try again.');
     }
   };
 
+  const clearError = () => setError(undefined);
+
   return (
     <div className="login-container">
-      <h1>Welcome to Login</h1>
+      <h1>Login</h1>
+
       <Form
         name="normal_login"
         className="login-form"
@@ -39,6 +44,7 @@ function Login() {
         }}
         onFinish={onFinish}
       >
+        {error && <Error message={error} clearError={clearError} />}
         <Form.Item
           name="emailOrUsername"
           rules={[
