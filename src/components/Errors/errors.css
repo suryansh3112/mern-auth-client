@@ -12,12 +12,14 @@
 }
 
 .error button {
-  border-radius: 50%;
+  border-radius: 100%;
   background-color: #fff;
   color: rgb(243, 54, 54);
   border: none;
   cursor: pointer;
   opacity: 0.9;
+  font-size: 10px;
+  font-weight: 900;
   /* float: right; */
 }
 
